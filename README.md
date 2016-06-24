@@ -4,7 +4,7 @@ A very simple plugin for viewing current location and weather conditions.
 
 It based on [Yahoo! Weather API](https://developer.yahoo.com/weather/). 
 
-![](https://github.com/fornitio/yahoo-weather-jquery-plugin/example.png)
+![](https://github.com/fornitio/yahoo-weather-jquery-plugin/blob/master/example.png)
 
 This plugin allows you to display the location, the current temperature, the current low temperature, the current high temperature, a weather icon.
 
