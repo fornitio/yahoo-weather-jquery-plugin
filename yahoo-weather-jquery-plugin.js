@@ -46,7 +46,7 @@
 							`;
 						this.append(template);
 			});
-		}).catch();
+		}).catch((err)=>{console.log(err)});
 		return this;
 	}
 })(jQuery)
