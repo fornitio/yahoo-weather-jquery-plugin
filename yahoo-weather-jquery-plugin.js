@@ -4,7 +4,7 @@
 		const fahrenheitToCelsius = (f) => Math.ceil((f-32)/1.8);
 		const config = {
 			method : 'GET',
-		    mode : 'cors'
+			mode : 'cors'
 		}
 		const def = {}
 		const location = new Promise(function(res,rej){
