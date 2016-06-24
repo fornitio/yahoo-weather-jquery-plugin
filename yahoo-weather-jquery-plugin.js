@@ -6,15 +6,7 @@
 			method : 'GET',
 		    mode : 'cors'
 		}
-		const defaults = {
-			image : '',
-			description : 'Waiting for forecast from Yahoo! Weather.',
-			date : new Date(),
-			tHigh : '',
-			tLow : '',
-			condition : '',
-			temp : ''
-		}
+		const def = {}
 		const location = new Promise(function(res,rej){
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(res, rej);
@@ -27,32 +19,29 @@
 				fetch(uri, config)
 					.then(res => res.json())
 					.then(res => {
-						defaults.image = res.query.results.channel.image.url;
-						defaults.description = res.query.results.channel.description;
-						defaults.date = res.query.results.channel.lastBuildDate;
-						defaults.tHigh = fahrenheitToCelsius(res.query.results.channel.item.forecast[0].high);
-						defaults.tLow = fahrenheitToCelsius(res.query.results.channel.item.forecast[0].low);
-						defaults.condition = res.query.results.channel.item.condition.text;
-						defaults.temp = fahrenheitToCelsius(res.query.results.channel.item.condition.temp);
+						def.city = res.query.results.channel.location.city;
+						def.country = res.query.results.channel.location.country;
+						def.date = new Date(res.query.created);
+						def.tHigh = fahrenheitToCelsius(res.query.results.channel.item.forecast[0].high);
+						def.tLow = fahrenheitToCelsius(res.query.results.channel.item.forecast[0].low);
+						def.condition = res.query.results.channel.item.condition.code;
+						def.temp = fahrenheitToCelsius(res.query.results.channel.item.condition.temp);
 						const template = `
-							<div id='condition'>
-								<img src="${defaults.image}">
-								<br><span>
-										${defaults.description} 
-									</span>
-								<br><span>
-										${defaults.date} 
-									</span>
-								<br><span>
-										&uparrow;t&deg;=${defaults.tHigh}&deg;C, 		
-										&downarrow;t&deg;=${defaults.tLow}&deg;C 		
-									</span>
-								<br><span>
-										${defaults.condition} 
-									</span>
-								<br><span>
-										t&deg;=${defaults.temp}&deg;C
-									</span>
+							<div class="btn btn-default">
+								<i class="wi wi-yahoo-${def.condition}">
+									&nbsp;${def.temp}&deg;C  ${def.city}, ${def.country}
+								</i>
+								<div>
+									${def.date.getDate()}/${def.date.getMonth()}, 
+									${def.date.getHours()}:${
+										(def.date.getMinutes()<10) ? '0' + def.date.getMinutes() : def.date.getMinutes()
+									} 
+								</div>
+								<div>
+									&downarrow;t&deg;=${def.tLow}&deg;C,&nbsp; 		
+									&uparrow;t&deg;=${def.tHigh}&deg;C		
+								</div>
+								<a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29"/> </a>
 							</div>
 							`;
 						this.append(template);

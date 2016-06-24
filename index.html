@@ -6,12 +6,18 @@
 			integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="
 			crossorigin="anonymous">
 		</script>
+		
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+		
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
 		<script type="text/javascript" src="yahoo-weather-jquery-plugin.js"></script>
 	</head>
 	<body>
+		<div class="container"></div>
 		<script type="text/javascript">
 			const main = () => {
-				$('body').jahooWeather();
+				$('.container').jahooWeather();
 			}
 			$(document).ready(main);
 		</script>
