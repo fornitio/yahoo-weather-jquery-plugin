@@ -1,6 +1,6 @@
 (function($, undefined) {
 	'use strict';
-	$.fn.jahooWeather = function(p1) {
+	$.fn.yahooWeather = function(p1) {
 		const fahrenheitToCelsius = (f) => Math.ceil((f-32)/1.8);
 		const config = {
 			method : 'GET',
