@@ -21,7 +21,6 @@
 		location
 			.catch(()=> Promise.resolve(kharkivLocation))
 			.then((location)=>{
-				console.log('location', location);
 				const query = `
 					select * from weather.forecast where woeid in (
 						SELECT woeid FROM geo.places 
