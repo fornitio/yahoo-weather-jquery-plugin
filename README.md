@@ -10,5 +10,7 @@ This plugin allows you to display the location, the current temperature, the cur
 
 The plugin uses [JQuery](https://jquery.com/), [bootstrap css](http://getbootstrap.com/css/) and [weather themed icons inspired by Font Awesome and ready for Bootstrap](http://erikflowers.github.io/weather-icons/).
 
+You can see a version of it here: `http://fornitio.github.io/weather/`
+
 ![](https://poweredby.yahoo.com/purple.png)
 

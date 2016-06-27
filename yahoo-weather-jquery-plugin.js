@@ -2,6 +2,12 @@
 	'use strict';
 	$.fn.yahooWeather = function(p1) {
 		const fahrenheitToCelsius = (f) => Math.ceil((f-32)/1.8);
+		const kharkivLocation = {
+			coords : {
+				latitude : 50.0346748,
+				longitude : 36.345833
+			}
+		}
 		const config = {
 			method : 'GET',
 			mode : 'cors'
@@ -13,7 +19,9 @@
 			} else rej('Browser doesn\'t support Geolocation');
 		});
 		location
+			.catch(()=> Promise.resolve(kharkivLocation))
 			.then((location)=>{
+				console.log('location', location);
 				const query = `
 					select * from weather.forecast where woeid in (
 						SELECT woeid FROM geo.places 
