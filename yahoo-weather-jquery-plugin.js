@@ -2,6 +2,8 @@
 	'use strict';
 	$.fn.yahooWeather = function(p1) {
 		const fahrenheitToCelsius = (f) => Math.ceil((f-32)/1.8);
+		const add0 = (x) => (x.toString()[0] !== '0') ? ( (x<10) ? '0' + x : x ) : x;
+		const addPlus = (x) => (x>0) ? '+' + x : x;
 		const kharkivLocation = {
 			coords : {
 				latitude : 50.0346748,
@@ -33,7 +35,7 @@
 			.then(res => res.json())
 			.then(res => {
 				const item = res.query.results.channel.item;
-				def.city = res.query.results.channel.location.city;
+				def.{ city } = res.query.results.channel.location.city;
 				def.country = res.query.results.channel.location.country;
 				def.date = new Date(res.query.created);
 				def.tHigh = fahrenheitToCelsius(item.forecast[0].high);
@@ -50,17 +52,15 @@
 			return `
 				<div class="btn btn-default">
 					<i class="wi wi-yahoo-${this.condition}">
-						&nbsp;${this.temp}&deg;C  ${this.city}, ${this.country}
+						&nbsp;${addPlus(this.temp)}&deg;C  ${this.city}, ${this.country}
 					</i>
 					<div>
-						${this.date.getDate()}/${this.date.getMonth()}, 
-						${this.date.getHours()}:${
-							(this.date.getMinutes()<10) ? '0' + this.date.getMinutes() : this.date.getMinutes()
-						} 
+						${add0( this.date.getDate() )}.${add0( this.date.getMonth()+1 )}.${this.date.getFullYear()}, 
+						${this.date.getHours()}:${add0(this.date.getMinutes())} 
 					</div>
 					<div>
-						&downarrow;t&deg;=${this.tLow}&deg;C,&nbsp; 		
-						&uparrow;t&deg;=${this.tHigh}&deg;C		
+						&downarrow;t&deg;&nbsp;${addPlus(this.tLow)}&deg;C,&nbsp; 		
+						&uparrow;t&deg;&nbsp;${addPlus(this.tHigh)}&deg;C		
 					</div>
 					<a href="https://www.yahoo.com/?ilc=401" target="_blank"> <!--Yahoo obligates to insert this-->
 						<img src="https://poweredby.yahoo.com/purple.png" width="134" height="29"/> 
